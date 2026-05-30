@@ -229,21 +229,44 @@ function renderBadgesGrid() {
   const grid = document.getElementById('lobby-badges-grid');
   if (!grid) return;
 
-  const unlockedSet = new Set(state.user.badgesUnlocked || []);
+  try {
+    const unlockedSet = new Set(state.user.badgesUnlocked || []);
 
-  grid.innerHTML = BADGES.map(badge => {
-    const isUnlocked = unlockedSet.has(badge.id);
-    return `
-      <div class="badge-card glass ${isUnlocked ? 'unlocked border-glow' : 'locked'}" title="${badge.desc}">
-        <div class="badge-icon">${badge.icon}</div>
-        <div class="badge-info">
-          <h4>${badge.name}</h4>
-          <p>${badge.desc}</p>
-          <span class="badge-criteria">${isUnlocked ? '✓ Unlocked' : `Requires: ${badge.requirement}`}</span>
-        </div>
-      </div>
-    `;
-  }).join('');
+    grid.innerHTML = BADGES.map(badge => {
+      const isUnlocked = unlockedSet.has(badge.id);
+      if (isUnlocked) {
+        return `
+          <div class="badge-card-container unlocked">
+            <div class="badge-card-flat glass">
+              <div class="badge-neon-circle">
+                <span class="badge-icon-3d">${badge.icon}</span>
+              </div>
+              <h4 class="badge-title-flat">${badge.name}</h4>
+              <p class="badge-desc-flat">${badge.desc}</p>
+              <div class="badge-divider-flat"></div>
+              <span class="badge-criteria-flat unlocked-text">&#x2713; Unlocked</span>
+            </div>
+          </div>
+        `;
+      } else {
+        return `
+          <div class="badge-card-container locked">
+            <div class="badge-card-flat glass">
+              <div class="badge-neon-circle">
+                <span class="badge-icon-3d">${badge.icon}</span>
+                <span class="badge-lock-overlay">🔒</span>
+              </div>
+              <h4 class="badge-title-flat">${badge.name}</h4>
+              <span class="badge-criteria-flat">Requires: ${badge.requirement}</span>
+            </div>
+          </div>
+        `;
+      }
+    }).join('');
+  } catch (err) {
+    grid.innerHTML = `<div style="color:red; background:#222; padding:20px; font-size:16px;">Error in renderBadgesGrid: ${err.message}<br>${err.stack}</div>`;
+    console.error(err);
+  }
 }
 
 export function renderRoomsList() {

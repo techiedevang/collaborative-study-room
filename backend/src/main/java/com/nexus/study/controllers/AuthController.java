@@ -22,6 +22,9 @@ public class AuthController {
     @Autowired
     private JwtTokenProvider tokenProvider;
 
+    @org.springframework.beans.factory.annotation.Value("${admin.email:admin@nexus.com}")
+    private String adminEmail;
+
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody Map<String, String> request) {
         String username = request.get("username");
@@ -40,6 +43,11 @@ public class AuthController {
         // Hash credentials
         User user = new User(username, email, passwordEncoder.encode(password), avatar);
         user.getBadgesUnlocked().add("first_step"); // Initial sign up badge
+        
+        if (email.equalsIgnoreCase(adminEmail)) {
+            user.setRole("ADMIN");
+        }
+
         userRepository.save(user);
 
         return ResponseEntity.ok(Map.of("message", "User registered successfully!"));
@@ -68,6 +76,7 @@ public class AuthController {
         response.put("xp", user.getXp());
         response.put("level", user.getLevel());
         response.put("badgesUnlocked", user.getBadgesUnlocked());
+        response.put("role", user.getRole());
 
         return ResponseEntity.ok(response);
     }

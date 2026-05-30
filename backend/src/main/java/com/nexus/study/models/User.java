@@ -32,6 +32,9 @@ public class User {
     @Column(name = "badge_id")
     private List<String> badgesUnlocked = new ArrayList<>();
 
+    @Column(nullable = false)
+    private String role = "USER";
+
     public User() {
     }
 
@@ -108,5 +111,13 @@ public class User {
 
     public void setBadgesUnlocked(List<String> badgesUnlocked) {
         this.badgesUnlocked = badgesUnlocked;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

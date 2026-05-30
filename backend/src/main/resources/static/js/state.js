@@ -2,7 +2,7 @@
 import { stopAllSounds } from './services/audio.js';
 
 const CHANNEL_NAME = 'nexus-study-room-channel';
-export let API_BASE_URL = 'http://localhost:8080/api';
+export let API_BASE_URL = '/api';
 
 // CONFIGURATION: Enter your Google Client ID here from Google Cloud Console
 export let GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';

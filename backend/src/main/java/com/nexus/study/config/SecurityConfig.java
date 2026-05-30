@@ -48,8 +48,9 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/api/ai/chat").permitAll() // let AI chatbot commands run easily
-                .anyRequest().authenticated()
+                .requestMatchers("/api/ai/chat").permitAll()
+                .requestMatchers("/api/**").authenticated()
+                .anyRequest().permitAll()
             );
 
         // Add our custom JWT security filter
