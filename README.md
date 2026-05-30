@@ -4,6 +4,8 @@ Nexus is an advanced, high-fidelity collaborative study room platform designed t
 
 This repository houses an enterprise-grade full-stack architecture tailored for collaborative study, featuring a Java Spring Boot secure API backend, a Supabase PostgreSQL database, and a highly interactive Vanilla JS frontend client served directly from the backend.
 
+**🌐 Live Production Deployment:** [https://nexus-collaborative-study-room-platform.onrender.com/](https://nexus-collaborative-study-room-platform.onrender.com/)
+
 ---
 
 ## ✨ Features
