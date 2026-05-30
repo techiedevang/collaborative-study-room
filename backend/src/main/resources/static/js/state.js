@@ -47,7 +47,7 @@ const rawState = {
   // Application Configurations loaded from .env
   config: {
     googleClientId: '',
-    apiBaseUrl: 'http://localhost:8080/api'
+    apiBaseUrl: '/api'
   }
 };
 
