@@ -1355,20 +1355,56 @@ input:focus, select:focus, textarea:focus {
 .boot-loader p { color: var(--text-secondary); font-size: 0.9rem; }
 
 /* Responsive Viewports */
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
   .lobby-grid { grid-template-columns: 1fr; }
   .room-grid { grid-template-columns: 1fr; }
   .room-column-left { width: 100%; }
   .flashcards-layout { grid-template-columns: 1fr; }
+  .landing-hero { grid-template-columns: 1fr !important; padding: 2rem !important; }
+  .landing-contact-grid { grid-template-columns: 1fr !important; }
+  .hero-content { align-items: center !important; text-align: center !important; }
+  .hero-content h2 { font-size: 2.2rem !important; }
+  .hero-actions { justify-content: center !important; width: 100%; }
+}
+
+@media (max-width: 768px) {
+  .app-header { padding: 1rem 1.5rem; flex-wrap: wrap; height: auto; gap: 1rem; }
+  .header-public-nav { width: 100%; justify-content: center; gap: 1rem !important; }
+  .app-main { padding: 1.5rem; }
+  .stats-overview-row { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .canvas-controls { flex-direction: column; align-items: stretch; }
+  .color-palette { justify-content: center; }
+  .auth-screen {
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+    max-width: 480px !important;
+    margin: 2rem auto !important;
+  }
+  .auth-visual-side {
+    display: none !important;
+  }
+  .auth-form-side {
+    padding: 1.5rem !important;
+  }
 }
 
 @media (max-width: 600px) {
-  .app-header { padding: 0 1rem; }
+  .app-header { padding: 1rem; flex-direction: column; align-items: center; gap: 1rem; }
+  #header-public-nav { display: none !important; } /* Hide links to save space */
+  #header-user-panel { width: 100%; justify-content: space-between; margin-top: 0.5rem; }
+  .user-info-text { display: none; }
   .app-main { padding: 1rem; }
   .welcome-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .stats-overview-row { grid-template-columns: 1fr; }
   .room-top-bar { flex-direction: column; align-items: flex-start; gap: 1rem; }
-  .room-actions { width: 100%; justify-content: space-between; }
+  .room-actions { width: 100%; justify-content: space-between; flex-wrap: wrap; }
+  .btn-large { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
+  .landing-hero h2 { font-size: 1.8rem !important; }
+  .badges-grid { grid-template-columns: 1fr; }
+  .flashcard-viewer { width: 100%; }
+  .room-participants-list { display: none; }
+  .backend-mode-card { flex-direction: column; align-items: stretch; text-align: center; gap: 1rem; }
+  .mode-toggle-switch { align-items: center; }
 }
 
 /* 3D Background Canvas */
@@ -2007,18 +2043,4 @@ html {
   100% { transform: translateY(-8px) scale(1.02); }
 }
 
-/* Responsive collapse rule for Split Screen auth page */
-@media (max-width: 768px) {
-  .auth-screen {
-    grid-template-columns: 1fr !important;
-    min-height: auto !important;
-    max-width: 480px !important;
-    margin: 2rem auto !important;
-  }
-  .auth-visual-side {
-    display: none !important;
-  }
-  .auth-form-side {
-    padding: 1.5rem !important;
-  }
-}
+/* Auth screen responsive rules merged above */

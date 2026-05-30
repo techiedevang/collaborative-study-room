@@ -98,6 +98,11 @@
       border-color: var(--color-primary);
       box-shadow: 0 0 10px var(--color-primary-glow);
     }
+    @media (max-width: 600px) {
+      .admin-header { flex-direction: column; gap: 15px; text-align: center; }
+      .admin-container { padding: 10px; margin: 20px auto; }
+      .tabs { flex-direction: column; gap: 10px; }
+    }
   </style>
 </head>
 <body>
@@ -128,7 +133,7 @@
         <button class="tab-btn" id="tab-rooms" onclick="switchTab('rooms')">Manage Rooms</button>
       </div>
 
-      <div id="view-users">
+      <div id="view-users" style="overflow-x: auto;">
         <table class="data-table">
           <thead>
             <tr>
@@ -147,7 +152,7 @@
         </table>
       </div>
 
-      <div id="view-rooms" style="display: none;">
+      <div id="view-rooms" style="display: none; overflow-x: auto;">
         <table class="data-table">
           <thead>
             <tr>

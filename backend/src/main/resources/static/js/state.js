@@ -42,7 +42,7 @@ const rawState = {
   notepad: {}, // roomId -> Notes content
   
   // Dual Execution Mode
-  backendMode: false, // Set to true to route auth/rooms/tasks/notes/AI through Spring Boot Java JWT Server
+  backendMode: true, // Set to true to route auth/rooms/tasks/notes/AI through Spring Boot Java JWT Server
   
   // Application Configurations loaded from .env
   config: {
