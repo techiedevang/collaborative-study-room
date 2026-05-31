@@ -36,15 +36,14 @@ export function initRoomComponent() {
   btnInvite.addEventListener('click', async () => {
     if (!state.activeRoom) return;
     
-    const inviteCode = `NEXUS-ROOM-${state.activeRoom.id}`;
-    const textToCopy = `${window.location.origin}?invite=${inviteCode}`;
+    const inviteCode = state.activeRoom.roomCode || `NEXUS-ROOM-${state.activeRoom.id}`;
 
     try {
-      await navigator.clipboard.writeText(textToCopy);
+      await navigator.clipboard.writeText(inviteCode);
       const originalText = btnInvite.innerHTML;
       btnInvite.innerHTML = `
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
-        <span>Copied Link!</span>
+        <span>Copied Code!</span>
       `;
       btnInvite.classList.add('copied');
       
@@ -99,6 +98,7 @@ export function renderRoomView() {
     // Update labels
     document.getElementById('room-display-name').textContent = state.activeRoom.name;
     document.getElementById('room-display-category').textContent = state.activeRoom.category;
+    document.getElementById('room-display-code').textContent = `Code: ${state.activeRoom.roomCode || 'N/A'}`;
 
     // Load active room members
     renderMembersList();

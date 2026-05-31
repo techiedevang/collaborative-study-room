@@ -408,10 +408,35 @@ export async function executeCreateRoom(name, category, description, focusTime) 
     category,
     description,
     focusTime,
-    creator: state.user.username
+    creator: state.user.username,
+    roomCode: Math.random().toString(36).substring(2, 8).toUpperCase()
   };
   state.rooms = [...state.rooms, localRoom];
   return localRoom;
+}
+
+export async function executeJoinRoomByCode(code) {
+  if (state.backendMode) {
+    try {
+      const res = await fetch(`${API_BASE_URL}/rooms/code/${code}`, { headers: getHeaders() });
+      if (res.ok) {
+        const room = await res.json();
+        return room;
+      } else {
+        throw new Error('Room not found with that code.');
+      }
+    } catch(e) {
+      console.error("Failed to join room by code on backend:", e);
+      throw e;
+    }
+  }
+
+  // Local emulation fallback
+  const room = state.rooms.find(r => r.roomCode === code);
+  if (room) {
+    return room;
+  }
+  throw new Error('Room not found with that code.');
 }
 
 // -------------------------------------------------------------

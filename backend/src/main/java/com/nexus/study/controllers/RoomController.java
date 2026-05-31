@@ -25,7 +25,18 @@ public class RoomController {
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         room.setCreator(username);
         
+        // Generate a 6-character room code
+        String code = java.util.UUID.randomUUID().toString().substring(0, 6).toUpperCase();
+        room.setRoomCode(code);
+        
         StudyRoom savedRoom = studyRoomRepository.save(room);
         return ResponseEntity.ok(savedRoom);
+    }
+
+    @GetMapping("/code/{code}")
+    public ResponseEntity<StudyRoom> getRoomByCode(@PathVariable String code) {
+        return studyRoomRepository.findByRoomCode(code)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

@@ -22,6 +22,9 @@ public class StudyRoom {
 
     private String creator;
 
+    @Column(unique = true)
+    private String roomCode;
+
     public StudyRoom() {
     }
 
@@ -80,5 +83,13 @@ public class StudyRoom {
 
     public void setCreator(String creator) {
         this.creator = creator;
+    }
+
+    public String getRoomCode() {
+        return roomCode;
+    }
+
+    public void setRoomCode(String roomCode) {
+        this.roomCode = roomCode;
     }
 }

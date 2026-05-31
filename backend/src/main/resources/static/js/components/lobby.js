@@ -1,5 +1,5 @@
 // Lobby & Dashboard UI Component Handler
-import { state, BADGES, executeCreateRoom, joinRoom, fetchRooms } from '../state.js';
+import { state, BADGES, executeCreateRoom, executeJoinRoomByCode, joinRoom, fetchRooms } from '../state.js';
 
 export function initLobbyComponent() {
   const btnOpenCreate = document.getElementById('btn-open-create-modal');
@@ -58,6 +58,41 @@ export function initLobbyComponent() {
       alert("Failed to launch study room: " + err.message);
     }
   });
+
+  // Join Room Modal Logic
+  const btnOpenJoin = document.getElementById('btn-open-join-modal');
+  const btnCloseJoin = document.getElementById('btn-close-join-modal');
+  const modalJoin = document.getElementById('modal-join-room');
+  const formJoinRoom = document.getElementById('form-join-room');
+
+  if (btnOpenJoin && btnCloseJoin && modalJoin && formJoinRoom) {
+    btnOpenJoin.addEventListener('click', () => {
+      modalJoin.classList.remove('hidden');
+    });
+
+    btnCloseJoin.addEventListener('click', () => {
+      modalJoin.classList.add('hidden');
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modalJoin) {
+        modalJoin.classList.add('hidden');
+      }
+    });
+
+    formJoinRoom.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const code = document.getElementById('join-room-code').value.trim().toUpperCase();
+      try {
+        const room = await executeJoinRoomByCode(code);
+        modalJoin.classList.add('hidden');
+        formJoinRoom.reset();
+        joinRoom(room);
+      } catch (err) {
+        alert("Failed to join study room: " + err.message);
+      }
+    });
+  }
 }
 
 function updateModeStatusUI(isBackendActive) {

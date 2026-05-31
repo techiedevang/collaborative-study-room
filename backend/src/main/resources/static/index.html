@@ -475,9 +475,14 @@
           <div class="lobby-right">
             <div class="rooms-header-row">
               <h2>Study Rooms</h2>
-              <button id="btn-open-create-modal" class="btn btn-primary">
-                <span>+</span> Create Room
-              </button>
+              <div style="display: flex; gap: 10px;">
+                <button id="btn-open-join-modal" class="btn btn-secondary">
+                  Join by Code
+                </button>
+                <button id="btn-open-create-modal" class="btn btn-primary">
+                  <span>+</span> Create Room
+                </button>
+              </div>
             </div>
 
             <div class="rooms-container" id="rooms-list-container">
@@ -521,6 +526,23 @@
             </form>
           </div>
         </div>
+
+        <!-- Join Room Modal Overlay -->
+        <div id="modal-join-room" class="modal-overlay hidden">
+          <div class="modal-card glass border-glow">
+            <div class="modal-header">
+              <h3>Join Study Room</h3>
+              <button id="btn-close-join-modal" class="btn-close">&times;</button>
+            </div>
+            <form id="form-join-room">
+              <div class="form-group">
+                <label for="join-room-code">Enter Room Code</label>
+                <input type="text" id="join-room-code" required placeholder="e.g. A9F2K1" style="text-transform: uppercase;">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Join Room</button>
+            </form>
+          </div>
+        </div>
       </section>
 
       <!-- 3. STUDY ROOM SCREEN -->
@@ -535,6 +557,7 @@
             <div class="room-text">
               <h2 id="room-display-name">Loading Room...</h2>
               <span id="room-display-category" class="room-category-pill">Category</span>
+              <span id="room-display-code" class="room-category-pill" style="background: rgba(139, 92, 246, 0.2); border: 1px solid rgba(139, 92, 246, 0.5);">Code: Loading...</span>
             </div>
           </div>
           
